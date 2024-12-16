@@ -1,7 +1,7 @@
 import sqlite3
 from domain import  Books
 
-def get_books(book_id):
+def get_book(book_id):
     con = sqlite3.connect("tf_backend_book.sqlite3")
     cur = con.cursor()
     res = cur.execute("SELECT * FROM books WHERE id = ?", (book_id,)).fetchone()
@@ -9,3 +9,9 @@ def get_books(book_id):
         return Books(res[0], res[1], res[2], res[3], res[4], res[5]).__dict__()
     else:
         return None
+
+def get_books():
+    con = sqlite3.connect("tf_backend_book.sqlite3")
+    cur = con.cursor()
+    return cur.execute("SELECT * FROM books").fetchall()
+
