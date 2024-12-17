@@ -26,9 +26,6 @@ class BookLendingModel(BaseModel):
   user : UsersModel
 
 class BookReviewModel(BaseModel):
-  id : str
   book_id : str
   review: str
   validated: int
-  
-  book : BooksModel
