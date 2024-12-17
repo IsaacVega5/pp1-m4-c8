@@ -74,3 +74,21 @@ def create_lending(book_id, user_id, start_date, end_date):
     cur = con.cursor()
     cur.execute("INSERT INTO book_lending (book_id, user_id, start_date, end_date) VALUES (?, ?, ?, ?)", (book_id, user_id, start_date, end_date))
     con.commit()
+    return {
+        "book_id": book_id,
+        "user_id": user_id,
+        "start_date": start_date,
+        "end_date": end_date
+    }
+
+def update_lending_by_id(lending_id, book_id, user_id, start_date, end_date):
+    con = sqlite3.connect("tf_backend_book.sqlite3")
+    cur = con.cursor()
+    cur.execute("UPDATE book_lending SET book_id = ?, user_id = ?, start_date = ?, end_date = ? WHERE rowid = ?", (book_id, user_id, start_date, end_date, lending_id))
+    con.commit()
+    return {
+        "book_id": book_id,
+        "user_id": user_id,
+        "start_date": start_date,
+        "end_date": end_date
+    }

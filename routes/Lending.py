@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 
-from library_service import get_lendings, get_lending, create_lending
+from library_service import get_lendings, get_lending, create_lending, update_lending_by_id
+from models import BookLendingModel
 
 router = APIRouter(
   prefix="/lending",
@@ -19,6 +20,15 @@ async def get_lending_by_book_id(book_id):
   return {"books": result}
 
 @router.post("/")
-async def create_new_lending(book_id, user_id, start_date, end_date):
-    create_lending(book_id, user_id, start_date, end_date)
-    return {"message": "Lending created successfully"}
+async def create_new_lending(lending: BookLendingModel):
+  result = create_lending(lending.book_id, lending.user_id, lending.start_date, lending.end_date)
+  return {
+    "lending": result
+  }
+
+@router.put("/{lending_id}")
+async def update_lending(lending_id, lending: BookLendingModel):
+  result = update_lending_by_id(lending_id, lending.book_id, lending.user_id, lending.start_date, lending.end_date)
+  return {
+    "lending": result
+  }
