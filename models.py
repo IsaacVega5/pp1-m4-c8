@@ -21,9 +21,6 @@ class BookLendingModel(BaseModel):
   user_id : str
   start_date: str
   end_date: str
-  
-  book : BooksModel
-  user : UsersModel
 
 class BookReviewModel(BaseModel):
   book_id : str

@@ -3,3 +3,4 @@
 __pycache__/
 tf_backend_book.sqlite3
 env
+*.sqlite3
