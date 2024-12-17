@@ -10,7 +10,7 @@ class Books:
 
     def __dict__(self):
         return {
-            "patient_id": self.id,
+            "id": self.id,
             "name": self.name,
             "publisher": self.publisher,
             "year": self.year,

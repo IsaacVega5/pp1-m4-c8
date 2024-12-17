@@ -3,14 +3,12 @@ from typing import List
 from pydantic import BaseModel
 
 class BooksModel(BaseModel):
-  id : str
   name: str
   publisher: str
   year: str
   edition: int
   authors: str
-  
-  books_lending : List["BookLendingModel"]
+
   
 class UsersModel(BaseModel):
   id : str
