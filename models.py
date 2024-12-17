@@ -23,9 +23,6 @@ class BookLendingModel(BaseModel):
   end_date: str
 
 class BookReviewModel(BaseModel):
-  id : str
   book_id : str
   review: str
   validated: int
-  
-  book : BooksModel
