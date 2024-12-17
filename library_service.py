@@ -1,6 +1,6 @@
 import sqlite3
 import uuid
-from domain import  Books
+from domain import  Books, Lending
 
 def get_book(book_id):
     con = sqlite3.connect("tf_backend_book.sqlite3")
@@ -55,3 +55,22 @@ def delete_book(book_id):
         pass
     
     return f"Book {book_id} deleted"
+def get_lendings():
+    con = sqlite3.connect("tf_backend_book.sqlite3")
+    cur = con.cursor()
+    return cur.execute("SELECT * FROM book_lending").fetchall()
+
+def get_lending(book_id):
+    con = sqlite3.connect("tf_backend_book.sqlite3")
+    cur = con.cursor()
+    res = cur.execute("SELECT * FROM book_lending WHERE book_id = ?", (book_id,)).fetchone()
+    if res:
+        return Lending(res[0], res[1], res[2], res[3]).__dict__()
+    else:
+        return None
+
+def create_lending(book_id, user_id, start_date, end_date):
+    con = sqlite3.connect("tf_backend_book.sqlite3")
+    cur = con.cursor()
+    cur.execute("INSERT INTO book_lending (book_id, user_id, start_date, end_date) VALUES (?, ?, ?, ?)", (book_id, user_id, start_date, end_date))
+    con.commit()

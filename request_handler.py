@@ -1,11 +1,12 @@
 import fastapi
 import uvicorn
-from routes import Books
+from routes import Books, Lending
 from library_service import get_books
 
 app = fastapi.FastAPI()
 
 app.include_router(Books.router)
+app.include_router(Lending.router)
 
 @app.get("/")
 async def root():
